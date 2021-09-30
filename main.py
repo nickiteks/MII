@@ -1,12 +1,13 @@
 import skfuzzy as fuzz
 import numpy as np
+import matplotlib.pyplot as plt
 
-x = np.arange(11)
-function = [1, 2, 5, 9]
+x = np.arange(int(input('введите кол-во патрон')))
+function = [1,6,8,100]
 
-mfx = fuzz.trapmf(x, function)
+#mfx = fuzz.trapmf(x, function)
 
-print(mfx)
+#print(mfx)
 # 0 1 2 3 4 5 6 7 8 9 100
 # 0 неподходит = 0
 # 1 подходит считаeм 1 - (2-1)/(2-1)
@@ -29,5 +30,8 @@ for i in x:
             continue
     else:
         result.append(0)
+
+plt.plot(result)
+plt.show()
 
 print(result)
