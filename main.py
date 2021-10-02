@@ -2,8 +2,8 @@ import skfuzzy as fuzz
 import numpy as np
 import matplotlib.pyplot as plt
 
-x = np.arange(int(input('введите кол-во патрон')))
-function = [1,6,8,100]
+x = np.arange(int(input()))
+function = [1,8,100]
 
 #mfx = fuzz.trapmf(x, function)
 
@@ -18,15 +18,12 @@ function = [1,6,8,100]
 result = []
 
 for i in x:
-    if function[0] <= i <= function[3]:
+    if function[0] <= i <= function[2]:
         if function[0] <= i <= function[1]:
             result.append(1 - (function[1] - i) / (function[1] - function[0]))
             continue
         if function[1] <= i <= function[2]:
-            result.append(1)
-            continue
-        if function[2] <= i <= function[3]:
-            result.append(1 - (i - function[2]) / (function[3] - function[2]))
+            result.append(1 - (i - function[1]) / (function[2] - function[1]))
             continue
     else:
         result.append(0)
