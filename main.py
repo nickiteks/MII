@@ -2,19 +2,8 @@ import skfuzzy as fuzz
 import numpy as np
 import matplotlib.pyplot as plt
 
-x = np.arange(int(input()))
+x = np.arange(int(input('Для скольки ядер ')))
 function = [1,8,100]
-
-#mfx = fuzz.trapmf(x, function)
-
-#print(mfx)
-# 0 1 2 3 4 5 6 7 8 9 100
-# 0 неподходит = 0
-# 1 подходит считаeм 1 - (2-1)/(2-1)
-# 2 подходит 1
-# 7
-# 8 подходит 1 - (8-5)/(9-5)
-
 result = []
 
 for i in x:
