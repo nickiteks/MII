@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+
+
 def count_cluster(x, function):
     result = []
     if function[0] <= x <= function[3]:
@@ -13,12 +16,22 @@ def count_cluster(x, function):
 
 
 def clustering(x):
-    print(f"Это на {count_cluster(x, [0, 25, 44, 100])} молодой возвраст")
-    print(f"Это на {count_cluster(x, [0, 44, 60, 100])} средний  возвраст")
-    print(f"Это на {count_cluster(x, [0, 60, 75, 100])} пожилой возвраст")
-    print(f"Это на {count_cluster(x, [0, 75, 90, 100])} старческий возвраст")
+    result = []
+    print(f"Это на {count_cluster(x, [0, 1, 20, 100])} молодой возвраст")
+    print(f"Это на {count_cluster(x, [20, 21, 40, 100])} средний  возвраст")
+    print(f"Это на {count_cluster(x, [40, 41, 70, 100])} пожилой возвраст")
+    print(f"Это на {count_cluster(x, [70, 71, 90, 100])} старческий возвраст")
+    result.append(count_cluster(x, [40, 41, 70, 100]))
+    result.append(count_cluster(x, [70, 71, 90, 100]))
+    print(result)
+
+    max = result[0]
+    for i in result:
+        if i > i:
+            max = i
+
+    print(max)
 
 
-trigger = True
-while trigger:
+while True:
     clustering(int(input("Введите возвраст ")))
