@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 x = np.arange(int(input('Для скольки ядер ')))
-function = [1,8,100]
+function = [1,4,10]
 result = []
 
 for i in x:
@@ -17,7 +17,7 @@ for i in x:
     else:
         result.append(0)
 
-plt.plot(result)
-plt.show()
-
-print(result)
+print(result[len(x) - 1])
+for i in range(len(result)):
+    result[i] = 1-result[i]
+print(result[len(x) - 1])
