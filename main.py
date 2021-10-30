@@ -1,3 +1,4 @@
+import tkinter
 from tkinter import *
 
 import numpy as np
@@ -45,6 +46,7 @@ def clicked():
     d = int(fn_1_4.get())
 
     list_functions.append(count_function(x, a, b, c, d, CheckVar1.get()))
+    listbox_update()
 
 
 def show():
@@ -54,7 +56,7 @@ def show():
 
 
 def change():
-    list_functions.pop(int(index.get()))
+    list_functions.pop(lbox.curselection()[0])
 
     x = np.arange(100)
 
@@ -64,17 +66,26 @@ def change():
     d = int(fn_1_4.get())
 
     list_functions.append(count_function(x, a, b, c, d, CheckVar1.get()))
+    listbox_update()
 
 
 def del_function():
-    list_functions.pop(int(index.get()))
+    list_functions.pop(lbox.curselection()[0])
+    listbox_update()
 
 
 def dop():
     result = []
-    for i in range(len(list_functions[int(index_dop1.get())])):
-        result.append(1 - list_functions[int(index_dop1.get())][i])
+    for i in range(len(list_functions[lbox.curselection()[0]])):
+        result.append(1 - list_functions[lbox.curselection()[0]][i])
     list_functions.append(result)
+    listbox_update()
+
+
+def listbox_update():
+    lbox.delete(0, tkinter.END)
+    for i in range(len(list_functions)):
+        lbox.insert(i, str(i))
 
 
 window = Tk()
@@ -109,8 +120,6 @@ btn.grid(column=2, row=5)
 btn_del = Button(window, text="Показать!", command=show)
 btn_del.grid(column=5, row=5)
 
-index = Entry(window, width=5)
-index.grid(column=1, row=6)
 
 btn_change = Button(window, text="Изменить!", command=change)
 btn_change.grid(column=2, row=6)
@@ -118,10 +127,11 @@ btn_change.grid(column=2, row=6)
 btn_del = Button(window, text="Удалить!", command=del_function)
 btn_del.grid(column=3, row=6)
 
-index_dop1 = Entry(window, width=5)
-index_dop1.grid(column=1, row=7)
 
-btn_dop = Button(window, text="Дополнить!", command=dop)
-btn_dop.grid(column=3, row=7)
+btn_del = Button(window, text="Дополнить!", command=dop)
+btn_del.grid(column=3, row=7)
+
+lbox = Listbox(width=15, height=8)
+lbox.grid(column=1, row=8)
 
 window.mainloop()
