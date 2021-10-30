@@ -3,6 +3,8 @@ from tkinter import *
 import numpy as np
 from matplotlib import pyplot as plt
 
+list_functions = []
+
 
 def count_function(x, a, b, c, d, isTrapezoid):
     result = []
@@ -42,20 +44,37 @@ def clicked():
     c = int(fn_1_3.get())
     d = int(fn_1_4.get())
 
-    result = count_function(x, a, b, c, d, CheckVar1.get())
-    result_2 = count_function(x, int(fn_2_1.get()), int(fn_2_2.get()), int(fn_2_3.get()), int(fn_2_4.get()),
-                              CheckVar2.get())
-    result_3 = count_function(x, int(fn_3_1.get()), int(fn_3_2.get()), int(fn_3_3.get()), int(fn_3_4.get()),
-                              CheckVar3.get())
-    result_4 = count_function(x, int(fn_4_1.get()), int(fn_4_2.get()), int(fn_4_3.get()), int(fn_4_4.get()),
-                              CheckVar4.get())
+    list_functions.append(count_function(x, a, b, c, d, CheckVar1.get()))
 
-    plt.plot(result)
-    plt.plot(result_2)
-    plt.plot(result_3)
-    plt.plot(result_4)
 
+def show():
+    for i in list_functions:
+        plt.plot(i)
     plt.show()
+
+
+def change():
+    list_functions.pop(int(index.get()))
+
+    x = np.arange(100)
+
+    a = int(fn_1_1.get())
+    b = int(fn_1_2.get())
+    c = int(fn_1_3.get())
+    d = int(fn_1_4.get())
+
+    list_functions.append(count_function(x, a, b, c, d, CheckVar1.get()))
+
+
+def del_function():
+    list_functions.pop(int(index.get()))
+
+
+def dop():
+    result = []
+    for i in range(len(list_functions[int(index_dop1.get())])):
+        result.append(1 - list_functions[int(index_dop1.get())][i])
+    list_functions.append(result)
 
 
 window = Tk()
@@ -84,67 +103,25 @@ CheckVar1 = BooleanVar()
 chk_fn1 = Checkbutton(window, text='Трапецевидная?', variable=CheckVar1)
 chk_fn1.grid(column=5, row=1)
 
-# function 2
-lbl_fn2 = Label(window, text="Функция 2:")
-lbl_fn2.grid(column=0, row=2)
-
-fn_2_1 = Entry(window, width=5)
-fn_2_1.grid(column=1, row=2)
-
-fn_2_2 = Entry(window, width=5)
-fn_2_2.grid(column=2, row=2)
-
-fn_2_3 = Entry(window, width=5)
-fn_2_3.grid(column=3, row=2)
-
-fn_2_4 = Entry(window, width=5)
-fn_2_4.grid(column=4, row=2)
-
-CheckVar2 = BooleanVar()
-chk_fn2 = Checkbutton(window, text='Трапецевидная?', variable=CheckVar2)
-chk_fn2.grid(column=5, row=2)
-
-# function 3
-lbl_fn3 = Label(window, text="Функция 3:")
-lbl_fn3.grid(column=0, row=3)
-
-fn_3_1 = Entry(window, width=5)
-fn_3_1.grid(column=1, row=3)
-
-fn_3_2 = Entry(window, width=5)
-fn_3_2.grid(column=2, row=3)
-
-fn_3_3 = Entry(window, width=5)
-fn_3_3.grid(column=3, row=3)
-
-fn_3_4 = Entry(window, width=5)
-fn_3_4.grid(column=4, row=3)
-
-CheckVar3 = BooleanVar()
-chk_fn3 = Checkbutton(window, text='Трапецевидная?', variable=CheckVar3)
-chk_fn3.grid(column=5, row=3)
-
-# function 4
-lbl_fn4 = Label(window, text="Функция 4:")
-lbl_fn4.grid(column=0, row=4)
-
-fn_4_1 = Entry(window, width=5)
-fn_4_1.grid(column=1, row=4)
-
-fn_4_2 = Entry(window, width=5)
-fn_4_2.grid(column=2, row=4)
-
-fn_4_3 = Entry(window, width=5)
-fn_4_3.grid(column=3, row=4)
-
-fn_4_4 = Entry(window, width=5)
-fn_4_4.grid(column=4, row=4)
-
-CheckVar4 = BooleanVar()
-chk_fn4 = Checkbutton(window, text='Трапецевидная?', variable=CheckVar4)
-chk_fn4.grid(column=5, row=4)
-
 btn = Button(window, text="Клик!", command=clicked)
 btn.grid(column=2, row=5)
+
+btn_del = Button(window, text="Показать!", command=show)
+btn_del.grid(column=5, row=5)
+
+index = Entry(window, width=5)
+index.grid(column=1, row=6)
+
+btn_change = Button(window, text="Изменить!", command=change)
+btn_change.grid(column=2, row=6)
+
+btn_del = Button(window, text="Удалить!", command=del_function)
+btn_del.grid(column=3, row=6)
+
+index_dop1 = Entry(window, width=5)
+index_dop1.grid(column=1, row=7)
+
+btn_dop = Button(window, text="Дополнить!", command=dop)
+btn_dop.grid(column=3, row=7)
 
 window.mainloop()
