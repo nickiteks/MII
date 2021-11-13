@@ -12,30 +12,17 @@ list_tendentions = []
 
 
 def graph_tend():
-    # list = []
-    # for i in list_tendentions:
-    #     if i == 'Стабильно':
-    #         tmp, = plt.plot(i, color='red', label='Стабильно')
-    #     if i == 'Потеплело':
-    #         tmp, = plt.plot(i, color='black', label='Потеплело')
-    #     if i == 'Похолодало':
-    #         tmp, = plt.plot(i, color='green', label='Похолодало')
-    #     list.append(tmp)
     fig, ax = plt.subplots()
     for x in range(len(list_tendentions)-1):
         if list_tendentions[x] == list_tendentions[x + 1]:
             plt.plot([x,x+1],[list_tendentions[x],list_tendentions[x+1]],color='g')
-        if list_tendentions[x] < list_tendentions[x + 1]:
+        if list_tendentions[x + 1] == 0:
+            plt.plot([x,x+1],[list_tendentions[x],list_tendentions[x+1]],color='g')
+        if list_tendentions[x + 1] == 1:
             plt.plot([x,x+1],[list_tendentions[x],list_tendentions[x+1]],color='r')
-        if list_tendentions[x] > list_tendentions[x + 1]:
+        if list_tendentions[x + 1] == -1:
             plt.plot([x,x+1],[list_tendentions[x],list_tendentions[x+1]],color='b')
 
-
-    #plt.plot([0, 1], [0, 1], color='r')
-    #plt.plot([1, 2], [1, 0], color='g')
-    # ax.axhspan(-1, -0.5, facecolor='blue', alpha=0.5)
-    # ax.axhspan(-0.5, 0.5, facecolor='yellow', alpha=0.5)
-    # ax.axhspan(0.5, 1, facecolor='red', alpha=0.5)
     plt.show()
 
 
