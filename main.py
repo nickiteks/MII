@@ -22,10 +22,20 @@ def graph_tend():
     #         tmp, = plt.plot(i, color='green', label='Похолодало')
     #     list.append(tmp)
     fig, ax = plt.subplots()
-    plt.plot(list_tendentions)
-    ax.axhspan(-1, -0.5, facecolor='blue', alpha=0.5)
-    ax.axhspan(-0.5, 0.5, facecolor='yellow', alpha=0.5)
-    ax.axhspan(0.5, 1, facecolor='red', alpha=0.5)
+    for x in range(len(list_tendentions)-1):
+        if list_tendentions[x] == list_tendentions[x + 1]:
+            plt.plot([x,x+1],[list_tendentions[x],list_tendentions[x+1]],color='g')
+        if list_tendentions[x] < list_tendentions[x + 1]:
+            plt.plot([x,x+1],[list_tendentions[x],list_tendentions[x+1]],color='r')
+        if list_tendentions[x] > list_tendentions[x + 1]:
+            plt.plot([x,x+1],[list_tendentions[x],list_tendentions[x+1]],color='b')
+
+
+    #plt.plot([0, 1], [0, 1], color='r')
+    #plt.plot([1, 2], [1, 0], color='g')
+    # ax.axhspan(-1, -0.5, facecolor='blue', alpha=0.5)
+    # ax.axhspan(-0.5, 0.5, facecolor='yellow', alpha=0.5)
+    # ax.axhspan(0.5, 1, facecolor='red', alpha=0.5)
     plt.show()
 
 
@@ -170,6 +180,14 @@ def listbox_update():
         lbox.insert(i, str(i))
 
 
+def global_method():
+    get_fuzzy_estimate()
+    get_tendentions()
+    show()
+    graph_NVK()
+    graph_tend()
+
+
 window = Tk()
 window.title("Оценка эффективностиопераций с валютой")
 lbl = Label(window, text="Введите данные")
@@ -228,5 +246,8 @@ btn_graph_NVK.grid(column=8, row=11)
 
 btn_graph_tend = Button(window, text="График тенденций!", command=graph_tend)
 btn_graph_tend.grid(column=9, row=11)
+
+btn_global = Button(window, text="Глобальный клик", command=global_method)
+btn_global.grid(column=8, row=9)
 
 window.mainloop()
