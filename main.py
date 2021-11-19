@@ -34,15 +34,15 @@ def predict():
     print(prognoze_list)
     print(getNext(prognoze_list))
     # Определяем лингвистическую метку будующего числа
-    graph_indexes.append(graph_indexes[len(graph_indexes) - 1] + getNext(prognoze_list))
+    graph_indexes.append(graph_indexes[len(graph_indexes) - 2] + getNext(prognoze_list))
     # Находим максимальное опдходящее по лингвистической метке
-    max = list_functions[graph_indexes[len(graph_indexes) - 1]][0]
+    max = list_functions[graph_indexes[len(graph_indexes) - 2]][0]
 
     index = 0
     # Берем нечеткое множество последнее в нашей метке идем по нему и находим максимальное подходящее число
-    for i in range(len(list_functions[graph_indexes[len(graph_indexes) - 1]])):
-        if list_functions[graph_indexes[len(graph_indexes) - 1]][i] > max:
-            max = list_functions[graph_indexes[len(graph_indexes) - 1]][i]
+    for i in range(len(list_functions[graph_indexes[len(graph_indexes) - 2]])):
+        if list_functions[graph_indexes[len(graph_indexes) - 2]][i] > max:
+            max = list_functions[graph_indexes[len(graph_indexes) - 2]][i]
             index = i
 
     clear_time_series.append(index)
