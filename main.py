@@ -7,7 +7,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 list_functions = []
-clear_time_series = [random.randint(2, 24) for _ in range(50)]
+clear_time_series = np.arange(1,80,2).tolist()
 list_time_marks = []
 graph_indexes = []
 list_tendentions = []
@@ -27,29 +27,30 @@ def getNext(listing):
 
 
 def predict():
-    prognoze_list.clear()
-    for i in range(len(list_tendentions) - 2):
-        list_work = [list_tendentions[i], list_tendentions[i + 1]]
-        prognoze_list.append(list_work)
-    print(prognoze_list)
-    print(getNext(prognoze_list))
-    # Определяем лингвистическую метку будующего числа
-    graph_indexes.append(graph_indexes[len(graph_indexes) - 2] + getNext(prognoze_list))
-    # Находим максимальное опдходящее по лингвистической метке
-    max = list_functions[graph_indexes[len(graph_indexes) - 2]][0]
+    for i in range(20):
+        prognoze_list.clear()
+        for i in range(len(list_tendentions) - 2):
+            list_work = [list_tendentions[i], list_tendentions[i + 1]]
+            prognoze_list.append(list_work)
+        print(prognoze_list)
+        print(getNext(prognoze_list))
+        # Определяем лингвистическую метку будующего числа
+        graph_indexes.append(graph_indexes[len(graph_indexes) - 2] + getNext(prognoze_list))
+        # Находим максимальное опдходящее по лингвистической метке
+        max = list_functions[graph_indexes[len(graph_indexes) - 2]][0]
 
-    index = 0
-    # Берем нечеткое множество последнее в нашей метке идем по нему и находим максимальное подходящее число
-    for i in range(len(list_functions[graph_indexes[len(graph_indexes) - 2]])):
-        if list_functions[graph_indexes[len(graph_indexes) - 2]][i] > max:
-            max = list_functions[graph_indexes[len(graph_indexes) - 2]][i]
-            index = i
+        index = 0
+        # Берем нечеткое множество последнее в нашей метке идем по нему и находим максимальное подходящее число
+        for i in range(len(list_functions[graph_indexes[len(graph_indexes) - 2]])):
+            if list_functions[graph_indexes[len(graph_indexes) - 2]][i] > max:
+                max = list_functions[graph_indexes[len(graph_indexes) - 2]][i]
+                index = i
 
-    clear_time_series.append(index)
-    razn = (clear_time_series[len(clear_time_series) - 2] - clear_time_series[len(clear_time_series) - 1]) / \
-           clear_time_series[len(clear_time_series) - 2]
+        clear_time_series.append(index)
+        razn = (clear_time_series[len(clear_time_series) - 2] - clear_time_series[len(clear_time_series) - 1]) / \
+               clear_time_series[len(clear_time_series) - 2]
 
-    print(razn)
+        print(razn)
 
 
 def graph_tend():
@@ -86,10 +87,9 @@ def graph_NVK():
 
 def graph_ChVK():
     list_help = clear_time_series.copy()
-    a = list_help.pop()
-    plt.plot(list_help, color='r')
-    list_help.pop()
-    list_help.append(a)
+    for i in range(20):
+        list_help.pop()
+    plt.plot(clear_time_series, color='r')
     plt.plot(list_help, color='g')
     plt.show()
 
